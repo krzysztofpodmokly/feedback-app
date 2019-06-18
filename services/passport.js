@@ -32,7 +32,8 @@ passport.use(
     new GoogleStrategy({
         clientID: keys.googleClientID,
         clientSecret: keys.googleClientSecret,
-        callbackURL: '/auth/google/callback' // after sign in, user will be redirected to this route
+        callbackURL: '/auth/google/callback', // after sign in, user will be redirected to this route
+        proxy: true // property need for making sure we've got HTTPS!
     },
     // callback is fired once permission from a user was granted
     (accessToken, refreshToken, profile, done) => {
