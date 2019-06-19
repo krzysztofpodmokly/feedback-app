@@ -36,20 +36,15 @@ passport.use(
         proxy: true // property need for making sure we've got HTTPS!
     },
     // callback is fired once permission from a user was granted
-    (accessToken, refreshToken, profile, done) => {
-        User.findOne({ googleId: profile.id }) // query returns a promise
-            .then(existingUser => {
-                // if no User has a googleId of profile.id then existingUser = null
-                if (existingUser) {
-                    // we already have a record with the given profle id
-                    done(null, existingUser); // null indicates that everything went fine
-                } else {
-                    // we don't have a user record with this ID, mae a new record
-                    new User({ googleId: profile.id }) // New Instance of the User is created...
-                        .save() // ... and saved to the database
-                        .then(user => done(null, user)); // saving a user is asynchronous function that's why .then must be chained
-                }
-            })
-        
+    async (accessToken, refreshToken, profile, done) => {
+        const existingUser = await User.findOne({ googleId: profile.id }) // query returns a promise
+        // if no User has a googleId of profile.id then existingUser = null
+        if (existingUser) {
+            // we already have a record with the given profle id
+            return done(null, existingUser); // null indicates that everything went fine
+        }
+        // we don't have a user record with this ID, mae a new record
+        const user = await new User({ googleId: profile.id }).save(); // New Instance of the User is created and saved to the database
+        done(null, user);
     })
 );

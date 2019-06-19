@@ -33,7 +33,6 @@ app.use(passport.session());
 authRoutes(app);
 // require('./routes/authRoutes')(app) => alternative way
 
-
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
