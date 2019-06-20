@@ -10,7 +10,14 @@ const keys = require('./config/keys');
 require('./models/User'); // order matters => we are using model class in ./services/passport
 require('./services/passport'); // so we must first load model to be able to use it there
 
-mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
+mongoose
+    .connect(keys.mongoURI, { useNewUrlParser: true })
+    .then(() => {
+        console.log('Connected to database')
+    })
+    .catch(err => {
+        console.log('Database error', err)
+    })
 
 const authRoutes = require('./routes/authRoutes');
 
