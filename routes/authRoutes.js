@@ -15,8 +15,11 @@ module.exports = (app) => {
 
     // req => incoming request
     // res => outgoing response
+    // This route will be responsible for comunicating backend with frontend
+    // in React action creator will be created which will make ajax request to this route
+    // and the result will be saved in state
     app.get('/api/current_user', (req, res) => {
-        res.send(req.user)
+        res.send(req.user); // this route responds with a model of a user which is currently logged in
         // res.send(req.session); // cookie-session library extracts data out of the cookie and then assigns it to req.session 
         // Passport pull all of the data it needs from req.session and passes that data to deserializeUser
     });
