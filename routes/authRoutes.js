@@ -5,12 +5,18 @@ module.exports = (app) => {
         scope: ['profile', 'email']
     }));
     
-    app.get('/auth/google/callback', passport.authenticate('google'));
+    app.get(
+        '/auth/google/callback',
+        passport.authenticate('google'), // after user successfully authenticates 
+        (req, res) => { // this function will be fired
+            res.redirect('/surveys'); // user will be redirected to /surveys
+        }
+    );
 
     app.get('/api/logout', (req, res) => {
         req.logout(); // logout() is a function attached by passport and it takes a cookie
         // that contains user's id and it kills the id which is inside
-        res.send(req.user);
+        res.redirect('/');
     });
 
     // req => incoming request

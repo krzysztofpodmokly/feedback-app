@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Payments from './Payments';
 
 // Header will be a class-based component because additional functions will be added
 // to decide what kind of button to render (login or logout)
-
 class Header extends Component {
 
     // Helper method which inspects this.props.auth property and depending on its value
@@ -16,7 +16,10 @@ class Header extends Component {
             case false:
                 return <li><a href="/auth/google">Login with Google</a></li>
             default:
-                return <li><a href="/api/logout">Logout</a></li>
+                return [
+                    <li key="1"><Payments /></li>,
+                    <li key="2"><a href="/api/logout">Logout</a></li>
+                ]
 
         }
     }
