@@ -5,7 +5,7 @@
 // Promise => .then()
 function fetchAlbums() {
     fetch('http://rallycoding.herokuapp.com/api/music_albums')
-        .then(res => {console.log('RES => ', res); res})
+        .then(res => res.json())
         .then(json => console.log(json));
 }
 
