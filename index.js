@@ -17,6 +17,7 @@ const authRoutes = require('./routes/authRoutes');
 const app = express();
 
 // ! middlewares are functions which are initialized before route handlers
+// middlewares can be also instructed to look at single, individual request aswell
 
 // creating a cookie
 app.use(
