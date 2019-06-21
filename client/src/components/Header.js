@@ -18,7 +18,8 @@ class Header extends Component {
             default:
                 return [
                     <li key="1"><Payments /></li>,
-                    <li key="2"><a href="/api/logout">Logout</a></li>
+                    <li key="2" style={{ margin: '0 10px' }}>Credits: {this.props.auth.credits}</li>,
+                    <li key="3"><a href="/api/logout">Logout</a></li>
                 ]
 
         }
@@ -26,7 +27,7 @@ class Header extends Component {
 
     render() {
         // this.props is coming from mapStateToProps function
-        // console.log(this.props)
+        console.log(this.props)
         return (
             <nav>
                 <div className="nav-wrapper">

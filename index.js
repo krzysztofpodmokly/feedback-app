@@ -3,6 +3,12 @@ const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const keys = require('./config/keys');
+const bodyParser = require('body-parser');
+
+const authRoutes = require('./routes/authRoutes');
+const billingRoutes = require('./routes/billingRoutes');
+
+const app = express();
 
 // Nothing is returned from passport.js so there is no need to assign it to variable
 // This file is only meant to be executed
@@ -19,9 +25,8 @@ mongoose
         console.log('Database error', err)
     })
 
-const authRoutes = require('./routes/authRoutes');
-
-const app = express();
+// body-parser package must be used whenever we are making POST/PATCH requests to the server
+app.use(bodyParser.json())
 
 // ! middlewares are functions which are initialized before route handlers
 // middlewares can be also instructed to look at single, individual request aswell
@@ -40,6 +45,7 @@ app.use(passport.session());
 
 authRoutes(app);
 // require('./routes/authRoutes')(app) => alternative way
+billingRoutes(app)
 
 const PORT = process.env.PORT || 5000;
 
